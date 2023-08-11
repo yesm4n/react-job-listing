@@ -47,17 +47,6 @@ export default function App() {
   );
 }
 
-function Cardbox() {
-  return (
-    <div className="card box">
-      <div className="icon-text">
-        <span className="skills">Frontend</span>
-        <img className="icon" src={iconremove} alt="Remove icon" />
-      </div>
-    </div>
-  );
-}
-
 function Company({ data, image }) {
   const {
     // id,
@@ -77,7 +66,7 @@ function Company({ data, image }) {
 
   return (
     <>
-      <div className={isNew && featured ? `card card-active` : `card`}>
+      <div className={isNew || featured ? `card card-active` : `card `}>
         <img className="img" src={image} alt="Account" />
         <div>
           <div className="card-info__header">
@@ -97,20 +86,51 @@ function Company({ data, image }) {
           </div>
         </div>
         <div className="card-title">
-          <span className="skills">{role}</span>
-          <span className="skills">{level}</span>
-          {languages.map(n => (
-            <span className="skills" key={n}>
-              {n}
-            </span>
-          ))}
-          {tools.map(n => (
-            <span className={tools ? 'skills' : ''} key={n}>
-              {n}
-            </span>
-          ))}
+          <Skills role={role} languages={languages} level={level} />
+          <Tools tools={tools} />
         </div>
       </div>
     </>
+  );
+}
+
+function Skills({ role, languages, level }) {
+  return (
+    <>
+      <span className="skills" onClick={() => console.log('clicked')}>
+        {role}
+      </span>
+      <span className="skills" onClick={() => console.log('clicked')}>
+        {level}
+      </span>
+      {languages.map(n => (
+        <span className="skills" key={n} onClick={() => console.log('clicked')}>
+          {n}
+        </span>
+      ))}
+    </>
+  );
+}
+
+function Tools({ tools }) {
+  return (
+    <>
+      {tools.map(n => (
+        <span className={tools ? 'skills' : ''} key={n}>
+          {n}
+        </span>
+      ))}
+    </>
+  );
+}
+
+function Cardbox() {
+  return (
+    <div className="card box">
+      <div className="icon-text">
+        <span className="skills">{'dadada'}</span>
+        <img className="icon" src={iconremove} alt="Remove icon" />
+      </div>
+    </div>
   );
 }
