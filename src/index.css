@@ -1,13 +1,190 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;700&display=swap');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-size: 15px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+:root {
+  --black: hsl(100, 100%, 0%);
+  --white: hsl(100, 100%, 100%);
+  --dark-cyan: hsl(180, 29%, 50%);
+  --grayish-cyan-background: hsl(180, 52%, 96%);
+  --grayish-cyan-tablets: hsl(180, 31%, 95%);
+  --grayish-cyan: hsl(180, 8%, 52%);
+  --very-dark-cyan: hsl(180, 14%, 20%);
+}
+
+body {
+  font-family: 'League Spartan', sans-serif;
+  margin: 0;
+  background-color: var(--grayish-cyan-background);
+}
+
+h4 {
+  margin: 0.8rem 0;
+  font-size: 17px;
+}
+
+h6 {
+  margin: 0;
+}
+
+img,
+svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Top section styling */
+
+.section {
+  background: var(--dark-cyan);
+}
+
+/* Background Image */
+
+.bg-img {
+  min-height: 100px;
+}
+
+/* Container */
+
+.container {
+  max-width: 900px;
+  width: 95%;
+  margin: 25px auto;
+}
+
+/* Cards position & styling */
+
+.hero {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: minmax(200px, 1fr);
+}
+
+.card {
+  margin: 10px 0;
+  box-shadow: var(--grayish-cyan) 0px 2px 8px 0px;
+  border-radius: 5px;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background-color: var(--white);
+}
+
+.card-info__header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.card-info__info {
+  display: flex;
+  gap: 1rem;
+  color: var(--grayish-cyan);
+  flex-wrap: wrap;
+}
+
+.card-title {
+  margin-left: auto;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.card-active {
+  border-left: 5px solid var(--dark-cyan);
+}
+
+/* Components */
+
+.card-header {
+  color: var(--dark-cyan);
+}
+
+.component {
+  padding: 0.4rem 0.4rem 0.3rem 0.4rem;
+  border-radius: 10px;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+
+.new {
+  background-color: var(--dark-cyan);
+  color: var(--white);
+}
+
+.featured {
+  background-color: var(--black);
+  color: var(--white);
+}
+
+.skills {
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--dark-cyan);
+  background-color: var(--grayish-cyan-tablets);
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+
+.skills:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+/* Hidden Box */
+
+.box {
+  flex-wrap: wrap;
+  gap: 1rem;
+  width: 95%;
+  margin: auto;
+  max-width: 900px;
+  position: relative;
+  top: 30px;
+}
+
+@media (width <= 550px) {
+  .container {
+    margin-top: 60px;
+  }
+
+  .hero {
+    margin-top: 10px;
+  }
+
+  .card {
+    position: relative;
+    margin: 30px 0;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .img {
+    position: absolute;
+    top: -45px;
+    left: 20px;
+  }
+
+  .card-info__header {
+    margin: 50px 0 0;
+  }
+
+  .card-title {
+    border-top: 1px solid var(--very-dark-cyan);
+    padding: 20px 0;
+    margin-left: unset;
+  }
+
+  .box {
+    margin: auto;
+    flex-direction: row;
+  }
 }
