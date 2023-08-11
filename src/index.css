@@ -7,6 +7,10 @@
   font-size: 15px;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   --black: hsl(100, 100%, 0%);
   --white: hsl(100, 100%, 100%);
@@ -104,9 +108,26 @@ svg {
 
 /* Components */
 
+/* Hidden icon X */
+
+.icon {
+  background-color: var(--dark-cyan);
+  padding: 0.4rem 0.4rem 0.3rem 0.4rem;
+  border-radius: 5px;
+}
+
+.icon:hover {
+  background-color: var(--black);
+  cursor: pointer;
+}
+
+/* Company name */
+
 .card-header {
   color: var(--dark-cyan);
 }
+
+/* New & Featured */
 
 .component {
   padding: 0.4rem 0.4rem 0.3rem 0.4rem;
@@ -124,6 +145,15 @@ svg {
   background-color: var(--black);
   color: var(--white);
 }
+
+/* Title - position */
+
+.position-header:hover {
+  cursor: pointer;
+  color: var(--dark-cyan);
+}
+
+/* Skills, languages */
 
 .skills {
   font-weight: 500;
@@ -149,6 +179,11 @@ svg {
   max-width: 900px;
   position: relative;
   top: 30px;
+}
+
+.icon-text {
+  display: flex;
+  align-items: center;
 }
 
 @media (width <= 550px) {

@@ -9,6 +9,7 @@ import manage from './images/manage.svg';
 import loopstudios from './images/loop-studios.svg';
 import eyecamco from './images/eyecam-co.svg';
 import airfilter from './images/the-air-filter-company.svg';
+import iconremove from './images/icon-remove.svg';
 import { data } from './Data';
 
 const images = [
@@ -29,9 +30,7 @@ export default function App() {
     <>
       <section className="section">
         <img className="bg-img" src={background} alt="Background header" />
-        <div className="card box">
-          <span className="skills">Frontend</span>
-        </div>
+        <Cardbox />
       </section>
       <div className="container">
         <div className="hero">
@@ -45,6 +44,17 @@ export default function App() {
         </div>
       </div>
     </>
+  );
+}
+
+function Cardbox() {
+  return (
+    <div className="card box">
+      <div className="icon-text">
+        <span className="skills">Frontend</span>
+        <img className="icon" src={iconremove} alt="Remove icon" />
+      </div>
+    </div>
   );
 }
 
@@ -79,7 +89,7 @@ function Company({ data, image }) {
               {featured ? 'Featured' : ''}
             </span>
           </div>
-          <h4>{position}</h4>
+          <h4 className="position-header">{position}</h4>
           <div className="card-info__info">
             <span>{postedAt}</span>
             <span> {contract} </span>
