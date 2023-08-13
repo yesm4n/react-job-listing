@@ -11,6 +11,7 @@ import eyecamco from './images/eyecam-co.svg';
 import airfilter from './images/the-air-filter-company.svg';
 import iconremove from './images/icon-remove.svg';
 import { data } from './Data';
+import { useState } from 'react';
 
 const images = [
   photosnap,
@@ -26,11 +27,22 @@ const images = [
 ];
 
 export default function App() {
+  const [selectListing, setSelectListing] = useState([]);
+
+  function handleSetSelectListing(newList) {
+    if (selectListing.includes(newList)) return;
+
+    setSelectListing([...selectListing, newList]);
+  }
+
   return (
     <>
       <section className="section">
         <img className="bg-img" src={background} alt="Background header" />
-        <Cardbox />
+        <Cardbox
+          selectListing={selectListing}
+          setSelectListing={setSelectListing}
+        />
       </section>
       <div className="container">
         <div className="hero">
@@ -39,6 +51,8 @@ export default function App() {
               data={companyData}
               key={companyData.id}
               image={images[index]}
+              selectListing={selectListing}
+              handleSetSelectListing={handleSetSelectListing}
             />
           ))}
         </div>
@@ -47,7 +61,7 @@ export default function App() {
   );
 }
 
-function Company({ data, image }) {
+function Company({ data, image, handleSetSelectListing }) {
   const {
     // id,
     // logo,
@@ -66,11 +80,11 @@ function Company({ data, image }) {
 
   return (
     <>
-      <div className={isNew || featured ? `card card-active` : `card `}>
+      <div className={isNew && featured ? `card card-active` : `card `}>
         <img className="img" src={image} alt="Account" />
         <div>
           <div className="card-info__header">
-            <h6 className="card-header">{company}</h6>
+            <h6 className="card-header"> {company} </h6>
             <span className={isNew ? 'new component' : ''}>
               {isNew ? 'New!' : ''}
             </span>
@@ -78,59 +92,94 @@ function Company({ data, image }) {
               {featured ? 'Featured' : ''}
             </span>
           </div>
-          <h4 className="position-header">{position}</h4>
+          <h4 className="position-header"> {position} </h4>
           <div className="card-info__info">
-            <span>{postedAt}</span>
+            <span> {postedAt} </span>
             <span> {contract} </span>
             <span> {location} </span>
           </div>
         </div>
         <div className="card-title">
-          <Skills role={role} languages={languages} level={level} />
-          <Tools tools={tools} />
+          <Skills
+            role={role}
+            languages={languages}
+            level={level}
+            handleSetSelectListing={handleSetSelectListing}
+          />
+          <Tools
+            tools={tools}
+            handleSetSelectListing={handleSetSelectListing}
+          />
         </div>
       </div>
     </>
   );
 }
 
-function Skills({ role, languages, level }) {
+function Skills({ role, languages, level, handleSetSelectListing }) {
   return (
     <>
-      <span className="skills" onClick={() => console.log('clicked')}>
+      <span className="skills" onClick={() => handleSetSelectListing(role)}>
         {role}
       </span>
-      <span className="skills" onClick={() => console.log('clicked')}>
+      <span className="skills" onClick={() => handleSetSelectListing(level)}>
         {level}
       </span>
-      {languages.map(n => (
-        <span className="skills" key={n} onClick={() => console.log('clicked')}>
-          {n}
+      {languages.map((lang, i) => (
+        <span
+          className="skills"
+          key={i}
+          onClick={() => handleSetSelectListing(lang)}
+        >
+          {lang}
         </span>
       ))}
     </>
   );
 }
 
-function Tools({ tools }) {
+function Tools({ tools, handleSetSelectListing }) {
   return (
     <>
-      {tools.map(n => (
-        <span className={tools ? 'skills' : ''} key={n}>
-          {n}
+      {tools.map(skillTools => (
+        <span
+          className={tools ? 'skills' : ''}
+          key={skillTools}
+          onClick={() => handleSetSelectListing(skillTools)}
+        >
+          {skillTools}
         </span>
       ))}
     </>
   );
 }
 
-function Cardbox() {
+function Cardbox({ selectListing, setSelectListing }) {
+  console.log(selectListing);
+
+  function handleClear(item) {
+    const updatedList = selectListing.filter(
+      selectedItem => selectedItem !== item
+    );
+    setSelectListing(updatedList);
+  }
+
   return (
-    <div className="card box">
-      <div className="icon-text">
-        <span className="skills">{'dadada'}</span>
-        <img className="icon" src={iconremove} alt="Remove icon" />
+    <>
+      <div className={selectListing.length === 0 ? '' : 'card box'}>
+        {selectListing.length > 0 &&
+          selectListing.map((item, index) => (
+            <div className="icon-text" key={index}>
+              <span className="skills">{item}</span>
+              <img
+                className="icon"
+                src={iconremove}
+                alt="Remove icon"
+                onClick={() => handleClear(item)}
+              />
+            </div>
+          ))}
       </div>
-    </div>
+    </>
   );
 }
