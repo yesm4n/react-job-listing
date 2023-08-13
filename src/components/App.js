@@ -155,8 +155,6 @@ function Tools({ tools, handleSetSelectListing }) {
 }
 
 function Cardbox({ selectListing, setSelectListing }) {
-  console.log(selectListing);
-
   function handleClear(item) {
     const updatedList = selectListing.filter(
       selectedItem => selectedItem !== item
