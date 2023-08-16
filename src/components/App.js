@@ -27,33 +27,21 @@ const images = [
 ];
 
 export default function App() {
-  const [selectListing, setSelectListing] = useState([]);
-
-  function handleSetSelectListing(newList) {
-    if (selectListing.includes(newList)) return;
-
-    setSelectListing([...selectListing, newList]);
-  }
+  const [role, setRole] = useState('');
+  const [level, setLevel] = useState([]);
+  const [language, setLanguage] = useState([]);
+  const [tools, setTools] = useState([]);
 
   return (
     <>
       <section className="section">
         <img className="bg-img" src={background} alt="Background header" />
-        <Cardbox
-          selectListing={selectListing}
-          setSelectListing={setSelectListing}
-        />
+        <Output iconremove={iconremove} />
       </section>
       <div className="container">
         <div className="hero">
-          {data.map((companyData, index) => (
-            <Company
-              data={companyData}
-              key={companyData.id}
-              image={images[index]}
-              selectListing={selectListing}
-              handleSetSelectListing={handleSetSelectListing}
-            />
+          {data.map(companyData => (
+            <Company key={companyData.id} data={companyData} images={images} />
           ))}
         </div>
       </div>
@@ -61,13 +49,12 @@ export default function App() {
   );
 }
 
-function Company({ data, image, handleSetSelectListing }) {
+function Company({ data, images }) {
   const {
-    // id,
-    // logo,
     company,
     contract,
     featured,
+    id,
     languages,
     level,
     location,
@@ -81,7 +68,7 @@ function Company({ data, image, handleSetSelectListing }) {
   return (
     <>
       <div className={isNew && featured ? `card card-active` : `card `}>
-        <img className="img" src={image} alt="Account" />
+        <img className="img" src={images[id - 1]} alt="Account" />
         <div>
           <div className="card-info__header">
             <h6 className="card-header"> {company} </h6>
@@ -100,83 +87,42 @@ function Company({ data, image, handleSetSelectListing }) {
           </div>
         </div>
         <div className="card-title">
-          <Skills
-            role={role}
-            languages={languages}
-            level={level}
-            handleSetSelectListing={handleSetSelectListing}
-          />
-          <Tools
-            tools={tools}
-            handleSetSelectListing={handleSetSelectListing}
-          />
+          <Skills data={data} />
         </div>
       </div>
     </>
   );
 }
 
-function Skills({ role, languages, level, handleSetSelectListing }) {
+function Skills({ data }) {
+  const { role, level, languages, tools } = data;
+
   return (
     <>
-      <span className="skills" onClick={() => handleSetSelectListing(role)}>
-        {role}
-      </span>
-      <span className="skills" onClick={() => handleSetSelectListing(level)}>
-        {level}
-      </span>
+      <span className="skills">{role}</span>
+      <span className="skills">{level}</span>
       {languages.map((lang, i) => (
-        <span
-          className="skills"
-          key={i}
-          onClick={() => handleSetSelectListing(lang)}
-        >
+        <span className="skills" key={i}>
           {lang}
         </span>
       ))}
-    </>
-  );
-}
-
-function Tools({ tools, handleSetSelectListing }) {
-  return (
-    <>
-      {tools.map(skillTools => (
-        <span
-          className={tools ? 'skills' : ''}
-          key={skillTools}
-          onClick={() => handleSetSelectListing(skillTools)}
-        >
-          {skillTools}
+      {tools.map((tool, i) => (
+        <span className="skills" key={i}>
+          {tool}
         </span>
       ))}
     </>
   );
 }
 
-function Cardbox({ selectListing, setSelectListing }) {
-  function handleClear(item) {
-    const updatedList = selectListing.filter(
-      selectedItem => selectedItem !== item
-    );
-    setSelectListing(updatedList);
-  }
-
+function Output({ iconremove }) {
   return (
     <>
-      <div className={selectListing.length === 0 ? '' : 'card box'}>
-        {selectListing.length > 0 &&
-          selectListing.map((item, index) => (
-            <div className="icon-text" key={index}>
-              <span className="skills">{item}</span>
-              <img
-                className="icon"
-                src={iconremove}
-                alt="Remove icon"
-                onClick={() => handleClear(item)}
-              />
-            </div>
-          ))}
+      <div className="card box">
+        <div className="icon-text">
+          <span className="skills">INSERT ITEM HERE</span>
+          <img className="icon" src={iconremove} alt="Remove icon" />
+        </div>
       </div>
     </>
   );
