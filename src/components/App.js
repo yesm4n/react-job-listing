@@ -34,7 +34,6 @@ export default function App() {
   const [level, setLevel] = useState([]);
   const [language, setLanguage] = useState([]);
   const [tools, setTools] = useState([]);
-  console.log(tools);
 
   function handleSetRole(newRole) {
     if (role.includes(newRole)) return;
