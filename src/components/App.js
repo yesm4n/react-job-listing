@@ -98,19 +98,34 @@ export default function App() {
       <div className="container">
         <div className="hero">
           {data.map(companyData => {
-            const { role, level, languages, tools } = companyData;
+            const {
+              role: companyRole,
+              level: companyLevel,
+              languages,
+              tools,
+            } = companyData;
+
+            const criteriaRole =
+              selectedCriteria.role.length === 0 ||
+              companyRole.includes(selectedCriteria.role);
+
+            const criteriaLevel =
+              selectedCriteria.level.length === 0 ||
+              companyLevel.includes(selectedCriteria.level);
+
+            const criteriaLanguages =
+              selectedCriteria.language.length === 0 ||
+              languages.some(lang => selectedCriteria.language.includes(lang));
+
+            const criteriaTools =
+              selectedCriteria.tools.length === 0 ||
+              tools.some(tool => selectedCriteria.tools.includes(tool));
 
             const shouldDisplay =
-              (selectedCriteria.role.length === 0 ||
-                role.includes(selectedCriteria.role)) &&
-              (selectedCriteria.level.length === 0 ||
-                level.includes(selectedCriteria.level)) &&
-              (selectedCriteria.language.length === 0 ||
-                languages.some(lang =>
-                  selectedCriteria.language.includes(lang)
-                )) &&
-              (selectedCriteria.tools.length === 0 ||
-                tools.some(tool => selectedCriteria.tools.includes(tool)));
+              criteriaRole &&
+              criteriaLevel &&
+              criteriaLanguages &&
+              criteriaTools;
 
             if (shouldDisplay) {
               return (
