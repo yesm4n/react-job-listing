@@ -52,7 +52,8 @@ svg {
 /* Background Image */
 
 .bg-img {
-  min-height: 100px;
+  background-image: url('./components/images/bg-header-desktop.svg');
+  min-height: 150px;
 }
 
 /* Container */
@@ -191,6 +192,10 @@ svg {
 }
 
 @media (width <= 550px) {
+  .bg-img {
+    background-image: url('./components/images/bg-header-mobile.svg');
+  }
+
   .container {
     margin-top: 60px;
   }

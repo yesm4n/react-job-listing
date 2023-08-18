@@ -2,8 +2,6 @@ import { useState } from 'react';
 import { data } from './Data';
 import Output from './Output';
 import Company from './Company';
-// Images
-import background from './images/bg-header-desktop.svg';
 import insure from './images/insure.svg';
 import account from './images/account.svg';
 import faceit from './images/faceit.svg';
@@ -84,7 +82,7 @@ export default function App() {
   return (
     <>
       <section className="section">
-        <img className="bg-img" src={background} alt="Background header" />
+        <div className="bg-img"></div>
         <Output
           iconremove={iconremove}
           role={role}
@@ -119,8 +117,6 @@ export default function App() {
             const criteriaTools =
               selectedCriteria.tools.length === 0 ||
               selectedCriteria.tools.every(tool => tools.includes(tool));
-
-            console.log(criteriaLanguages);
 
             const shouldDisplay =
               criteriaRole &&
