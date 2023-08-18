@@ -55,21 +55,20 @@ export default function App() {
     setTools([...tools, newTool]);
   }
 
-  function handleClear(skillType) {
+  function handleClear(skillType, skill) {
     switch (skillType) {
       case 'role':
-        setRole([]);
+        setRole(role.filter(existingRole => existingRole !== skill));
         break;
       case 'level':
-        setLevel([]);
+        setLevel(level.filter(existingLevel => existingLevel !== skill));
         break;
       case 'language':
-        setLanguage([]);
+        setLanguage(language.filter(existingLang => existingLang !== skill));
         break;
       case 'tools':
-        setTools([]);
+        setTools(tools.filter(existingTool => existingTool !== skill));
         break;
-
       default:
         break;
     }
@@ -115,11 +114,13 @@ export default function App() {
 
             const criteriaLanguages =
               selectedCriteria.language.length === 0 ||
-              languages.some(lang => selectedCriteria.language.includes(lang));
+              selectedCriteria.language.every(lang => languages.includes(lang));
 
             const criteriaTools =
               selectedCriteria.tools.length === 0 ||
-              tools.some(tool => selectedCriteria.tools.includes(tool));
+              selectedCriteria.tools.every(tool => tools.includes(tool));
+
+            console.log(criteriaLanguages);
 
             const shouldDisplay =
               criteriaRole &&

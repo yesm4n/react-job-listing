@@ -14,7 +14,7 @@ export default function Output({
           className="icon"
           src={iconremove}
           alt="Remove icon"
-          onClick={() => handleClear(skillType)}
+          onClick={() => handleClear(skillType, skill)}
         />
       </div>
     ));
