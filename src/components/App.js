@@ -2,30 +2,7 @@ import { useState } from 'react';
 import { data } from './Data';
 import Output from './Output';
 import Company from './Company';
-import insure from './images/insure.svg';
-import account from './images/account.svg';
-import faceit from './images/faceit.svg';
-import photosnap from './images/photosnap.svg';
-import myhome from './images/myhome.svg';
-import shortly from './images/shortly.svg';
-import manage from './images/manage.svg';
-import loopstudios from './images/loop-studios.svg';
-import eyecamco from './images/eyecam-co.svg';
-import airfilter from './images/the-air-filter-company.svg';
 import iconremove from './images/icon-remove.svg';
-
-const images = [
-  photosnap,
-  manage,
-  account,
-  myhome,
-  loopstudios,
-  faceit,
-  shortly,
-  insure,
-  eyecamco,
-  airfilter,
-];
 
 export default function App() {
   const [role, setRole] = useState([]);
@@ -95,20 +72,15 @@ export default function App() {
       <div className="container">
         <div className="hero">
           {data.map(companyData => {
-            const {
-              role: companyRole,
-              level: companyLevel,
-              languages,
-              tools,
-            } = companyData;
+            const { role, level, languages, tools } = companyData;
 
             const criteriaRole =
               selectedCriteria.role.length === 0 ||
-              companyRole.includes(selectedCriteria.role);
+              role.includes(selectedCriteria.role);
 
             const criteriaLevel =
               selectedCriteria.level.length === 0 ||
-              companyLevel.includes(selectedCriteria.level);
+              level.includes(selectedCriteria.level);
 
             const criteriaLanguages =
               selectedCriteria.language.length === 0 ||
@@ -129,7 +101,6 @@ export default function App() {
                 <Company
                   key={companyData.id}
                   data={companyData}
-                  images={images}
                   handleSetRole={handleSetRole}
                   handleSetLevel={handleSetLevel}
                   handleSetLanguage={handleSetLanguage}

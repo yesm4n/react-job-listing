@@ -2,7 +2,6 @@ import Skills from './Skills';
 
 export default function Company({
   data,
-  images,
   handleSetRole,
   handleSetLevel,
   handleSetLanguage,
@@ -12,8 +11,8 @@ export default function Company({
     company,
     contract,
     featured,
-    id,
     location,
+    logo,
     new: isNew,
     position,
     postedAt,
@@ -22,7 +21,7 @@ export default function Company({
   return (
     <>
       <div className={isNew && featured ? `card card-active` : `card `}>
-        <img className="img" src={images[id - 1]} alt="Account" />
+        <img className="img" src={logo} alt={company} />
         <div>
           <div className="card-info__header">
             <h6 className="card-header"> {company} </h6>
